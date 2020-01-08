@@ -1,0 +1,451 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+ul li {
+  list-style: none;
+}
+
+#sketchpad {
+  display: block;
+  position: fixed;
+  top:0;
+  left: 0;
+  background: #ffffff;
+}
+body {
+  overflow:hidden;
+  touch-action: none;
+}
+.head-control {
+  position: fixed;
+  top: 40px;
+  left:0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.head-control .control {
+  position: relative;
+  width: 112px;
+  margin: 0 5%;
+  height: 16px;
+  display: flex;
+  align-items: center;
+}
+.head-control .control img {
+  width: 112px;
+  height: 16px;
+}
+.head-control .control .head-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  border: 1px solid #999;
+  background: #fff;
+}
+.footer-control {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.footer-control button {
+  outline:none;
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 12px;
+  background: #EBEBEB;
+  border: 1px solid #DADADA;
+}
+.footer-control button img {
+  width: 33px;
+  height: 33px;
+}
+
+.footer-control button.dl img,
+.footer-control button.clear img{
+  position: absolute; left: 50%; top: 50%;
+  margin-top: -12px;
+  margin-left: -12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+.footer-control button.brush {
+  background-color: #EF8A7E;
+}
+.footer-control button.brush.active {
+  background-color: #EF8A7E;
+}
+.footer-control button.brush.active::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-bottom: 3.5px solid #ccc;
+  border-right: 3.5px solid #ccc;
+  border-top: 3.5px solid #fff;
+  border-left: 3.5px solid #fff;
+  position: absolute;
+  bottom: -3.5px;
+  right: -3.5px;
+}
+.footer-control button.color {
+  background-color: #000000;
+}
+.footer-control button.dl.active {
+  background: lightgreen;
+}
+.footer-control button.dl.active::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-bottom: 3.5px solid #cccccc;
+  border-right: 3.5px solid #cccccc;
+  border-top: 3.5px solid #fff;
+  border-left: 3.5px solid #fff;
+  position: absolute;
+  bottom: -3.5px;
+  right: -3.5px;
+}
+
+.footer-control button.clear.active {
+  background: #5C95DC;
+}
+.footer-control button.eraser.active {
+  background: #B4CB45;
+}
+.choose {
+  position: fixed;
+  bottom: 80px;
+  left: 0;
+  width: 100vw;
+}
+.choose .chooseBrush {
+  display: none;
+}
+.choose .chooseBrush.active {
+  display: block;
+}
+.choose .chooseBrush ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  width: 60%;
+  margin-left: 10%;
+  border: 1px solid #eee;
+}
+.choose button {
+  outline:none;
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  width: 37px;
+  height: 37px;
+  margin: 10px 12px;
+  background: #EBEBEB;
+  border: 1px solid #fff;
+}
+.choose button img {
+  width: 33px;
+  height: 33px;
+}
+.choose button {
+  position: relative;
+}
+.choose button.brush-pencil {
+  background: #EC7C6E;
+}
+.choose button.brush-pencil.active:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 37px;
+  height: 37px;
+  top: -3px;
+  left: -3px;
+  border: 2px solid #EC7C6E;
+  border-radius: 50%;
+}
+.choose button.brush-pen {
+  background: #74BBC6;
+}
+.choose button.brush-pen.active:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 37px;
+  height: 37px;
+  top: -3px;
+  left: -3px;
+  border: 2px solid #74BBC6;
+  border-radius: 50%;
+}
+.choose button.brush-watercolor {
+  background: #8388C2;
+}
+.choose button.brush-watercolor.active:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 37px;
+  height: 37px;
+  top: -3px;
+  left: -3px;
+  border: 2px solid #8388C2;
+  border-radius: 50%;
+}
+.choose button.brush-soft {
+  background: #7ED0F6;
+}
+.choose button.brush-soft.active:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 37px;
+  height: 37px;
+  top: -3px;
+  left: -3px;
+  border: 2px solid #7ED0F6;
+  border-radius: 50%;
+}
+.choose .chooseColor {
+  display: none;
+}
+.choose .chooseColor.active {
+  display: block;
+}
+.choose .chooseColor {
+  position: relative;
+  width: 94vw;
+  height: 205px;
+  margin: 0 auto;
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+.choose .chooseColor .colors {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 200vw;
+  overflow: hidden;
+  transition: all 1s;
+}
+.chooseColor .colors-1 {
+  float: left;
+  width: 94vw;
+}
+.chooseColor .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  flex-wrap: wrap;
+}
+.chooseColor .colors-2 {
+  float: left;
+  width: 94vw;
+}
+.chooseColor .button {
+  display: block;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 10px 3vw;
+  background: #EBEBEB;
+  border: 1px solid #fff;
+}
+.chooseColor .button-1 {
+  background: #50AF53;
+}
+.chooseColor .button-2 {
+  background: #18BD92;
+}
+.chooseColor .button-3 {
+  background: #508AEB;
+}
+.chooseColor .button-4 {
+  background: #32A5E6;
+}
+.chooseColor .button-5 {
+  background: #7E97AD;
+}
+.chooseColor .button-6 {
+  background: #E13529;
+}
+.chooseColor .button-7 {
+  background: #DD5847;
+}
+.chooseColor .button-8 {
+  background: #F26829;
+}
+.chooseColor .button-9 {
+  background: #F78A37;
+}
+.chooseColor .button-10 {
+  background: #F5B436;
+}
+
+.chooseColor .button-11 {
+  background: #D3457D;
+}
+.chooseColor .button-12 {
+  background: #5C448E;
+}
+.chooseColor .button-13 {
+  background: #445CC8;
+}
+.chooseColor .button-14 {
+  background: #009380;
+}
+.chooseColor .button-15 {
+  background: #C17730;
+}
+.chooseColor .button-16 {
+  background: #6EE6C3;
+}
+.chooseColor .button-17 {
+  background: #18BD92;
+}
+.chooseColor .button-18 {
+  background: #8BB2F7;
+}
+.chooseColor .button-19 {
+  background: #32A5E6;
+}
+.chooseColor .button-20 {
+  background: #9EB7CD;
+}
+.chooseColor .button-21 {
+  background: #106E60;
+}
+.chooseColor .button-22 {
+  background: #FA7B58;
+}
+.chooseColor .button-23 {
+  background: #FE9251;
+}
+.chooseColor .button-24 {
+  background: #FFB463;
+}
+.chooseColor .button-25 {
+  background: #EAC284;
+}
+
+.chooseColor .button-26 {
+  background: #F670A5;
+}
+.chooseColor .button-27 {
+  background: #9E87CD;
+}
+.chooseColor .button-28 {
+  background: #778EF4;
+}
+.chooseColor .button-29 {
+  background: #56C6B6;
+}
+.chooseColor .button-30 {
+  background: #D8957A;
+}
+.circle-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 22px;
+}
+.firstPage,
+.secondPage{
+  width: 5px;
+  height: 5px;
+  margin: 0px 7px;
+  border-radius: 50%;
+  background: #cccccc;
+}
+.firstPage.active,
+.secondPage.active{
+  background: #E9D2B3;
+}
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.alert {
+  display: none;
+}
+.alert.active {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  transition: all .5s;
+  display: inline-block;
+  text-align: center;
+  background-color: rgba(49,49,49,.8);
+  color: #fff;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 18px 25px;
+  line-height: 27px;
+  vertical-align: middle;
+}
+.caveat {
+  display: none;
+}
+.caveat.active {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  transition: all .5s;
+  display: inline-block;
+  text-align: center;
+  background-color: rgba(49,49,49,.8);
+  color: #fff;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 18px 25px;
+  line-height: 27px;
+  vertical-align: middle;
+}
+.caveat button {
+  margin: 15px 15px 5px 15px;
+  padding: 4px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  background: #ffffff;
+  outline: none;
+}

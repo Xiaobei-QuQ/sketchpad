@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from "react";
+import "./App.css";
+import { ConfigProvider } from "antd";
+import zhCn from "antd/lib/locale/zh_CN";
+import AppRouter from "./router";
+import { initState, reducer, ReducerContext } from "./utils/reducerContext";
+
+const AppProvider = (props: { children: React.ReactNode }) => {
+  const [state, dispatch] = useReducer(reducer, initState);
+  return (
+    <ReducerContext.Provider value={{ state, dispatch }}>
+      {props.children}
+    </ReducerContext.Provider>
+  );
+};
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ConfigProvider locale={zhCn}>
+      <AppProvider>
+        <AppRouter></AppRouter>
+      </AppProvider>
+    </ConfigProvider>
   );
-}
+};
 
 export default App;
